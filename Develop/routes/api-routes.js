@@ -4,6 +4,7 @@ module.exports = function(app) {
     app.get("/api/workouts", (req, res) => {
         db.Workout.find({})
             .then(dbWorkout => {
+                console.log(dbWorkout)
                 res.json(dbWorkout);
             })
             .catch(err => {
@@ -22,7 +23,7 @@ module.exports = function(app) {
                 res.status(400).json(err);
             });
     });
-    
+
     app.put('/api/workouts/:id', (req, res) => {
         const exercise = req.body;
         db.Workout.findByIdAndUpdate(req.params.id, {
@@ -41,9 +42,6 @@ module.exports = function(app) {
     app.get("/api/workouts/range", (req, res) => {
         db.Workout
             .find({})
-            .sort({
-                day: -1
-            })
             .then(workout => {
                 res.json(workout);
             })
