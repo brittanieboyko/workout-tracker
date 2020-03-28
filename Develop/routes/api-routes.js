@@ -22,22 +22,30 @@ module.exports = function(app) {
                 res.status(400).json(err);
             });
     });
-
-    app.put("/api/workouts/:id", ({
-        body
-    }, res) => {
-        db.Workout.create(body)
-            .then(({
-                _id
-            }) => db.Workout.findOneAndUpdate({}, {
+    
+    app.put('/api/workouts/:id', (req, res) => {
+        const exercise = req.body;
+        db.Workout.findByIdAndUpdate(req.params.id, {
                 $push: {
-                    exercises: _id
+                    exercises: exercise
                 }
-            }, {
-                new: true
-            }))
+            })
             .then(dbWorkout => {
                 res.json(dbWorkout);
+            })
+            .catch(err => {
+                res.status(400).json(err);
+            });
+    });
+
+    app.get("/api/workouts/range", (req, res) => {
+        db.Workout
+            .find({})
+            .sort({
+                day: -1
+            })
+            .then(workout => {
+                res.json(workout);
             })
             .catch(err => {
                 res.status(400).json(err);
