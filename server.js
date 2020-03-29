@@ -16,7 +16,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true
-}).then(() => {console.log('Connection to database established.')})
+})
+.then(() => {console.log('Connected to database.')})
 .catch(  err => {console.log(err)});
 
 require("./routes/api-routes")(app);
