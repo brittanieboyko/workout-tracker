@@ -1,6 +1,7 @@
 # Workout Tracker
 
 Workout Tracket is a fitness tracking application that uses a Mongo database created with a Mongoose schema. It handles routes with Express.
+
 ![fitnessTracker](public/assets/images/fitnessTracker.png)
 
 ## User Story
